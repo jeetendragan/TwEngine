@@ -8,6 +8,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ChartsModule, ThemeService } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { BlogComponent } from './blog/blog.component';
 import { FeedComponent } from './feed/feed.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { IFrameEmbedderComponent, SafePipe } from './iframe-embedder/iframe-embedder.component';
+
 
 @NgModule({
   declarations: [
@@ -41,11 +43,13 @@ import { IFrameEmbedderComponent, SafePipe } from './iframe-embedder/iframe-embe
     MatInputModule,
     MatSelectModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [
     BlogCardService,
-    DetailedBlogService
+    DetailedBlogService,
+    ThemeService
   ],
   bootstrap: [AppComponent]
 })
