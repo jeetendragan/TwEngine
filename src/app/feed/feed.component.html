@@ -2,7 +2,130 @@
 
   <div class="item item-4 feedMain" fxFlexOffset.xs="0">
 
-    <mat-card *ngFor="let blogCardData of blogCards" class="blogCard">
+        <div class="searchBar">
+            <mat-form-field class="searchBarField">
+              <mat-label>Search...</mat-label>
+              <input [(ngModel)] = "searchQuery" matInput placeholder="Covid vaccine, or covid USA, or whatever...">
+            </mat-form-field>
+            <button mat-button>
+              <mat-icon (click) = "fireSearch()">search</mat-icon>
+          </button>
+        </div>
+        <div>{{searchQuery}}</div>
+        <div>Result: {{result}}</div>
+
+        <div class="searchOptions">
+          <mat-form-field class="searchOptionItem">
+            <mat-label>Country</mat-label>
+            <mat-select [(ngModel)]="searchOptCountry">
+              <mat-option>None</mat-option>
+              <mat-option value="United States">United States</mat-option>
+              <mat-option value="India">India</mat-option>
+              <mat-option value="Italy">Italy</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="searchOptionItem">
+            <mat-label>POI</mat-label>
+            <mat-select [(ngModel)]="searchOptPoi">
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Narendra Modi</mat-option>
+              <mat-option value="option2">Arvind Kejriwal</mat-option>
+              <mat-option value="option3">Indian Health Ministry</mat-option>
+              <mat-option value="option3">Donald Trump</mat-option>
+              <mat-option value="option3">Andrew Cuomo</mat-option>
+              <mat-option value="option3">CDC</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="searchOptionItem">
+            <mat-label>Topic</mat-label>
+            <mat-select [(ngModel)]="searchOptTopic">
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Covid</mat-option>
+              <mat-option value="option2">CDC</mat-option>
+              <mat-option value="option3">Masks</mat-option>
+              <mat-option value="option3">Trump</mat-option>
+              <mat-option value="option3">Vaccine</mat-option>
+              <mat-option value="option3">lockdown</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="searchOptionItem">
+            <mat-label>Language</mat-label>
+            <mat-select [(ngModel)]="searchOptLang">
+              <mat-option>None</mat-option>
+              <mat-option value="English">English</mat-option>
+              <mat-option value="Hindi">Hindi</mat-option>
+              <mat-option value="Italian">Italian</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+        </div>        
+    <div class="searchResults" fxLayout="row"> 
+      <div class="searchResultsColumn">
+        <div class="searchResultColumnHeading">
+          Related Tweets
+        </div>
+
+        <div class="searchResultCard" *ngFor="let a of result; let index = index">{{a}}</div>
+
+        <div class="searchResultCard">
+          <div class="searchResultCardHeader">
+            <b>@cdc</b>
+          </div>
+          <div class="searchResultCardBody">
+            Rates of #COVID19 remain high across all regions of the United States, with 68% of jurisdictions experiencing increasing case rates. Help slow the spread:
+            Face with medical mask Wear a mask over your nose AND mouth.
+            Raised hand with fingers splayed Wash your hands. 
+            Left right arrow Stay 6 feet from others. 
+          </div>
+          <div class="searchResultOtherDetails">
+            other details appear here..
+          </div>
+        </div>
+
+        <div class="searchResultCard">
+          <div class="searchResultCardHeader">
+            <b>@realDonaldTrump</b>
+          </div>
+          <div class="searchResultCardBody">
+            I will easily & quickly win Georgia if Governor 
+        @BrianKempGA
+         or the Secretary of State permit a simple signature verification. Has not been done and will show large scale discrepancies. Why are these two “Republicans” saying no? If we win Georgia, everything else falls in place!
+          </div>
+
+          <div class="searchResultCardOtherDetails">
+            Other details will appear here...
+          </div>
+
+        </div>
+
+      </div>
+      <div class="searchResultsColumn">
+        <div class="searchResultColumnHeading">
+          Related News
+        </div>
+        <div class="searchResultCard">
+          <div class="searchResultCardHeader">
+            <b>Covid-19 has already exhausted the US. And it's only the start of a dark and deadly winter</b>
+          </div>
+          <div class="searchResultCardBody">
+            From California to Kansas, Massachusetts to Florida, and everywhere in-between, doctors, nurses, funeral home directors and food bank organizers are bracing for a devastating season. They're already stretched thin and exhausted after months of confronting the deadly Covid-19 pandemic, but they fear the worst is still yet to come.
+          </div>
+          <div class="searchResultOtherDetails">
+            <b>Source - CNN</b>
+          </div>
+        </div>
+      </div>
+      <div class="searchResultsColumn">
+        <div class="searchResultColumnHeading">
+          Related Analytics
+        </div>
+      </div>
+    </div>
+
+    <!--<mat-card *ngFor="let blogCardData of blogCards" class="blogCard">
       <mat-card-content>
         <div fxLayout="column">
           <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-sm="column">
@@ -10,8 +133,8 @@
             <div style="color: gray;">{{blogCardData.caption}}</div>
           </div>
           <div style="margin: 10px;" [innerHTML]="blogCardData.summary">
-            <!-- {{blogCardData.summary}} -->
-          </div>
+            --><!-- {{blogCardData.summary}} -->
+    <!--      </div>
         </div>
       </mat-card-content>
       <mat-card-actions>
@@ -20,6 +143,7 @@
           <mat-icon>open_in_new</mat-icon>
         </button>
         </a>
+      -->
         <!-- (click)="readBlog(blogCardData.id)" -->
         <!-- <button mat-icon-button>
             <mat-icon style="color:grey;">share</mat-icon>
@@ -27,9 +151,9 @@
           <button  mat-icon-button>
             <mat-icon style="color: grey;">thumb_up</mat-icon>
           </button> -->
-      </mat-card-actions>
+      <!--</mat-card-actions>
     </mat-card>
-  </div>
+  </div>-->
 
   <!-- <div class="item item-5 feedSidebar" fxFlex>
       <mat-card class="sidebarCard">

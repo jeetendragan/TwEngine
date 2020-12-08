@@ -14,7 +14,7 @@
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: firebrick; 
+    background: #314067; 
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {

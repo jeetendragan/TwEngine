@@ -4,6 +4,10 @@ import { DetailedBlogService } from './data-fetcher/detailed-blog.service';
 import { BlogCardService } from './data-fetcher/blog-card.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,7 +37,11 @@ import { IFrameEmbedderComponent, SafePipe } from './iframe-embedder/iframe-embe
     BrowserAnimationsModule,
     MaterialModule,
     BlogCardModule,
-    DetailedBlogModule
+    DetailedBlogModule,
+    MatInputModule,
+    MatSelectModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     BlogCardService,

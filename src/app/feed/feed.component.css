@@ -2,11 +2,53 @@
     height: 100%;
 }
 .feedMain{
-    /* border: 1px solid red; */
+    /*border: 1px solid red;*/
     padding: 5px;
     width: 100%;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
     /* margin-bottom: 50px; */
     /* border-right: 1px dashed grey; */
+}
+.searchBar{
+    /*border: 1px solid orangered;*/
+    text-align: center;
+    font-size: small;
+    max-width: 100%;
+    margin-left: 60px;
+    margin-right: 60px;
+    padding: 0px;
+}
+.searchBarField {
+    width: 90%;
+    margin-right: 5px;
+}
+.searchOptions{
+    /*border: 1px solid green;*/
+    text-align: center;
+    font-size: small;
+    max-width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 0px;
+}
+.searchOptionItem{
+    margin-left: 5px;
+    padding: 0px;
+}
+.searchResults{
+    /*border: 1px solid purple;*/
+    max-width: 100%;
+}
+.searchResultsColumn{
+    /*border: 1px solid green;*/
+    width: 100%;
+    padding: 5px;
+}
+.searchResultColumnHeading{
+    text-align: center;
+    border-bottom: 2px solid #314067;
 }
 .feedSidebar{
     padding: 5px;
@@ -18,13 +60,26 @@
     position: sticky;
     top: 0;
 }
-.blogCard{
-    margin-top: 40px;
-    margin-left: 80px;
-    margin-right:80px;
-    /* background-color: #FFF5EE; */
+.searchResultCard{
+    font-size: 11px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right:2px;
+    padding: 1px;
+    /*border-bottom: 1px solid grey;8*/
+}
+.searchResultCardHeader{
+    font-size: 12px;
+}
+.searchResultCardBody{
+
+}
+.searchResultCardOtherDetails{
+    text-decoration: bold;
 }
 a{
     text-decoration: none;
     color: grey;
 }
+
+
