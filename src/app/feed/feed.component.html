@@ -64,7 +64,7 @@
     </div>
 
     <div class="searchResults" fxLayout="row">
-      <div class="searchResultsColumn">
+      <!--<div class="searchResultsColumn">
         <div class="searchResultColumnHeading">
           Related News
         </div>
@@ -83,7 +83,7 @@
             </div>  
           </div>
         </div>
-      </div>
+      </div>-->
       <div class="searchResultsColumn">
         <div class="searchResultColumnHeading">
           Related Tweets
@@ -103,7 +103,10 @@
             {{tweet['full_text'][0]}}
           </div>
           <div class="searchResultCardOtherDetails">
-            Sentiment: {{tweet['tweet_sentiment'][0]}} <br>
+            <div *ngIf="tweet['tweet_sentiment'][0] == 'positive'" style="color:green">Positive</div>
+            <div *ngIf="tweet['tweet_sentiment'][0] == 'negative'" style="color:red">Negative</div>
+            <b><div *ngIf="tweet['tweet_sentiment'][0] == 'neutral'">Neutral</div></b>
+            <!--<b>Sentiment: {{tweet['tweet_sentiment'][0]}} <br></b>-->
             BM25 Score- {{tweet['score']}} | Influence Score: {{tweet['influence_score']}} 
           </div>
         </div>

@@ -86,7 +86,7 @@ export class FeedComponent implements OnInit {
     this.generalSentimentData = null;
     this.pieChartCountryTweetData = null;
     this.barChartPoiSentimentData = null;
-    //this.tweetsByTopicData = null;
+    this.tweetsByTopicData = null;
   }
 
   readBlog(blogId: string) {
@@ -110,10 +110,10 @@ export class FeedComponent implements OnInit {
   toggleSort(){
     if(this.sortByInfScore){
       // sort it by the normal score
-      this.returnedTweets.sort((a, b) => (a.score > b.score) ? 1 : -1)
+      this.returnedTweets.sort((a, b) => (a.score < b.score) ? 1 : -1)
     }else{
       // sort it by the influence score
-      this.returnedTweets.sort((a, b) => (a.influence_score > b.influence_score) ? 1 : -1)
+      this.returnedTweets.sort((a, b) => (a.influence_score < b.influence_score) ? 1 : -1)
     }
     this.sortByInfScore = !this.sortByInfScore;
   }
@@ -131,6 +131,7 @@ export class FeedComponent implements OnInit {
     this.pieChartCountryTweetData = null;
     this.barChartPoiSentimentData = null;
     this.tweetsByTopicData = null;
+    this.sortByInfScore = false;
 
     let httpParams = new HttpParams({
       fromObject: {
@@ -144,7 +145,7 @@ export class FeedComponent implements OnInit {
 
     console.log(httpParams)
     console.log("Result will appear after this:")
-    this.http.get("http://35.175.211.148:8080/search", { params: httpParams }).subscribe(data => {
+    this.http.get("http://54.80.27.58:8080/search", { params: httpParams }).subscribe(data => {
       console.log("Response: ")
       console.log(data)
       if (true) {
@@ -262,11 +263,11 @@ export class FeedComponent implements OnInit {
       })
 
 
-    let httpParamsNews = new HttpParams({
+    /*let httpParamsNews = new HttpParams({
       fromObject: {
         q: this.searchQuery + "",
         sortBy: 'popularity',
-        apiKey: 'c6bd6ed91fcc4c16b045b28bc78bd923'
+        apiKey: 'a6180e5ba7ae44a2a2224381c707e362'
       }
     });
 
@@ -285,7 +286,7 @@ export class FeedComponent implements OnInit {
       error => {
         console.log("Error: " + error)
         this.searchStatus = "Error"
-      })
+      })*/
 
   }
 }
