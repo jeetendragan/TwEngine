@@ -17,150 +17,53 @@
         </canvas>
       </div>-->
 
-    <div style="display: block; width: 500px; height: 500px; margin: 0 auto;">
-      <canvas baseChart 
-        [data]="pieChartData" 
-        [labels]="pieChartLabels" 
-        [chartType]="pieChartType"
-        [plugins]="pieChartPlugins"
-        [legend]="pieChartLegend">
+      <div style="display: block; width: 500px; margin: 0 auto;">
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+          [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+        </canvas>
+      </div>
+
+      <div style="width: 500px; margin: 0 auto; padding: 0px;">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [plugins]="barChartPlugins"
+          [legend]="barChartLegend" [chartType]="barChartType">
+        </canvas>
+      </div>
+
+      <div style="width: 500px; margin: 0 auto; padding: 0px; ">
+        <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels2" [plugins]="barChartPlugins"
+          [legend]="barChartLegend" [chartType]="barChartType">
       </canvas>
-    </div>
+      </div>
+      <div style="margin: 0 auto;">
+        <!---<fusioncharts
+          width="700"
+          height="400"
+          type="Column2d"
+          [dataSource]="dateSource">
+        </fusioncharts>--->
 
-    <div style="width: 500px; height: 500px; margin: 0 auto; padding: 0px;">
-      <canvas baseChart 
-        [datasets]="barChartData"
-        [labels]="barChartLabels"
-        [plugins]="barChartPlugins"
-        [legend]="barChartLegend"
-        [chartType]="barChartType">
-      </canvas>
-    </div> 
+        <fusioncharts
+          [type]="type"
+          [width]="width"
+          [height]="height"
+          [dataSource]="dataSourceUsa">
+        </fusioncharts>
 
-    <div style="width: 500px; height: 500px; margin: 0 auto; padding: 0px; ">
-      <canvas baseChart 
-        [datasets]="barChartData2"
-        [labels]="barChartLabels2"
-        [plugins]="barChartPlugins"
-        [legend]="barChartLegend"
-        [chartType]="barChartType">
-      </canvas>
-    </div> 
+        <fusioncharts
+          [type]="type"
+          [width]="width"
+          [height]="height"
+          [dataSource]="dataSourceIn">
+        </fusioncharts>
+        
+        <fusioncharts
+          [type]="type"
+          [width]="width"
+          [height]="height"
+          [dataSource]="dataSourceIt">
+        </fusioncharts>
+      </div>
 
-      <!--[options]="lineChartOptions"
-        <mat-card class="blogCard">
-        <mat-card-content>
-          <div fxLayout="column">
-            <div style="margin: 10px;">
-              <h3>Hello, World from The AlgoSchool!</h3>
-              <div>
-                <p>My name is Jeetendra. I started this website to write articles about the interesting science that sorrounds us and to share my projects. I also create video tutorials from various topics in computer science. I am currently pursuing a Masters degree in Computer Science from
-                  the University at Buffalo.
-                </p>
-                <p>
-                  Here are some relavent links: 
-                  <a href="https://github.com/jeetendragan" target="_blank">
-                    <button mat-button style="background-color: grey; color: white; font-size: x-small;
-                          padding: 0 12px;">
-                      <img src="../assets/images/github-circle-white-transparent.svg">
-                      GitHub
-                    </button>
-                  </a>&nbsp;&nbsp;
-                  <a href="https://www.youtube.com/channel/UCisFDUJAVR3zpikIC4mWqCQ?view_as=subscriber" target="_blank">
-                    <button mat-button style="background-color: grey; color: white; font-size: x-small;
-                            padding: 0 12px;">
-                      <img src="../assets/images/youtube_social_circle_white.png" width="25px" height="25px">
-                      YouTube
-                    </button>
-                  </a>&nbsp;&nbsp;
-                  <a href="https://www.linkedin.com/in/jeetendra-gan-805b8993/" target="_blank">
-                    <button mat-button style="background-color: white; color: white; font-size: x-small;
-                              padding: 0 12px;">
-                      <img src="../assets/images/LI-In-Bug.png" width="20px" height="20px">
-                    </button>
-                  </a>
-                  <a target="_blank" href="https://docs.google.com/document/d/1XItsOjhtL1l3wYigUvNZNybh7HsIftx1ohT9nxVU1js/edit?usp=sharing">Resume</a>
-                  &nbsp;&nbsp;
-                  Email: jeetendra.gan@gmail.com
-                </p>
-
-                <hr>
-                
-
-                <p>I am graduating in Feb 2021, and looking for challenging full-time opportunities right after graduation. I have broad interests ranging from back-end development, web front-end development, data engineering, machine learning, android apps, SRE, and desktop apps. 
-                  I have done prior work in each of these areas(extensive in some, and beginner in some), and would be willing to work in any of them. </p>
-                  
-                <p>I also have prior work experience building design optimization solutions(more below), and is one area I would love to work on again if I get a chance. </p>
-
-                <b>Summary of learnings at various work experiences</b>
-                <mat-card class="blogCard">
-                  <mat-card-content>
-                    <div fxLayout="column">
-                      <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-sm="column">
-                        <div style="font-weight: 800">Equinix</div>
-                        <div style="color: gray;">Software Engineering Intern | Sunnyvale, CA | July 20 - Present</div>
-                      </div>
-                      <div style="margin: 10px;">
-                        <b>My role</b><br>
-                        I am part of the DCIM(Data Center Infrastructure Monitoring) team at Equinix. My role has been at the intersection of a back-end developer and a Site Reliability Engineer. I have worked on adding various features to the Play Application that monitors various components in the data center, and pushing the data to AppDynamics.
-                        <br>
-
-                        <br><b>How am I helping the company?</b><br>
-                        My work here helps towards Equinix's promise of providing 99.999% availability to its customers by providing more visibility about the health of the crucial data-center components.
-                        <br><br><b>What have I learned? Challenges faced?</b><br>
-                        I have gotten a chance to see what it takes to build a fault-tolerant real time application. I was exposed to the technologies like Play, Cassandra, Kafka, Apache Storm, Oracle DB, Jenkins, etc.
-                        Sending the data almost continuously to AppDynamics(every 45 secs) has its challenges. Using parallelism, and in-memory caches facilitated us to get updated health status in less than 45 seconds, and push it to AppDynamics.
-                      </div>
-                    </div>
-                  </mat-card-content>
-                </mat-card>
-
-                <mat-card class="blogCard">
-                  <mat-card-content>
-                    <div fxLayout="column">
-                      <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-sm="column">
-                        <div style="font-weight: 800">University at Buffalo</div>
-                        <div style="color: gray;">Research Assistant | Buffalo, NY | April 20 - June 20</div>
-                      </div>
-                      <div style="margin: 10px;">
-                        <b>My role</b><br>
-                        We were building an application (android, iOS, with a back-end) to help maintain social distance for covid-19. I worked on the android team, and my job was to build, and implement the algorithm to measure social distance, and add features like geofencing to understand weather the close contact happened on or off-campus. <a href = "https://play.google.com/store/apps/details?id=com.ub.pocketcares">Here</a> is a link to the android app.
-                        <br>
-
-                        <br><b>What have I learned? Challenges faced?</b><br>
-                        The application had to be built as soon as possible to mitigate the effects of Covid-19 on campus, so speed was a challenge in this project. I was working on this app when I had 4 hard courses. It was a challenge to manage both at the same time, and glad that I was able to do so.
-                      </div>
-                    </div>
-                  </mat-card-content>
-                </mat-card>
-
-                <mat-card class="blogCard">
-                  <mat-card-content>
-                    <div fxLayout="column">
-                      <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-sm="column">
-                        <div style="font-weight: 800">Techture Structures</div>
-                        <div style="color: gray;">Software Development Engineer | India | July 17 - July 19</div>
-                      </div>
-                      <div style="margin: 10px;">
-                        <b>My role</b><br>
-                        I was Techture's first software developer and started their CAD software/plugin development unit. Here, I got a chance to work on many technologies(C#, Web dev, back-end dev), and work on hard problems at the intersection of construction and technology.
-                        <br>
-
-                        <br><b>How am I helping the company?</b><br>
-                        The company had a well established CAD design team, but wanted someone to automate repetetive tasks within a CAD software through plugins. I worked for a few clients and also on our own product(CoBuild). During this process, I learned a lot about this area, I wrote a lot of code in the form of well documented reusable libraries/projects, and trained new joinees and interns. I was also able to win a very important client. I not only contributed to the CAD team but wore many hats and contributed to the web front-end team buy building CAD software on the web, and training the new web developers.
-
-                        <br><br><b>What have I learned? Challenges faced?</b><br>
-                        One really interesting thing about CAD software development is that you get to solve algorithmic problems every day. I got a chance to solve problems ranging from simple geometric algorithms like line intersecion, rectangle intersection to more complex algorithms like minimal cycle basis. In one of our products, we were trying to solve a design automation problem (given a set of lego pieces (precast parts) design a building in the most optimal manner given the architectural specification (floor-plan, etc.), and structural preferences and constraints). When building this product, I got introdced to the area of combinatorial optimization, which I find really fascinating, and immensely interesting because of its potential ability to be useful in literally any field (biology, chip design, logistics, finance, etc.) 
-                        <br><br>Given the company was just starting its software division, there were financial and time constraints. To solve such hard problems in a time-constrained environment was a challenge. My work speed improved over time, and the key takeaway from this experience is that speed, agility, and innovation are a few crutial things that keep companies alive, and that employees should be was fast and as agile as possible.
-                      </div>
-                    </div>
-                  </mat-card-content>
-                </mat-card>
-              </div>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>-->
     </mat-tab>
   </mat-tab-group>
 

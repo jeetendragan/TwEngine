@@ -116,5 +116,4 @@ export class DetailedBlogService {
 
     return null;
   }
-
 }

@@ -1,8 +1,16 @@
 import { Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatAccordion} from '@angular/material/expansion';
 import { ChartDataSets, ChartOptions, ChartType} from 'chart.js';
+import * as FusionCharts from 'fusioncharts';
 import { Color, Label } from 'ng2-charts';
 import { SingleDataSet, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { BlogCardModule } from '../data-fetcher/blog-card.module';
+import { BlogCardService } from '../data-fetcher/blog-card.service';
+import { HttpClient } from '@angular/common/http'; 
+import { Observable } from 'rxjs';
+import usTime   from "../../assets/usTimeline.json";
+import inTime   from "../../assets/inTimeline.json";
+import itTime   from "../../assets/itTimeline.json";
 
 @Component({
   selector: 'app-home',
@@ -62,8 +70,144 @@ export class HomeComponent implements OnInit {
     { data: [22523, 9458, 40105, 4681, 5590, 13935, 4148, 2739, 2739, 5728, 3591, 12196, 4325, 5116, 5991, 2474, 13449, 1918, 2961, 2926], label: 'Important Topics' }
   ]
 
+  dataSourceUsa: any;
+  dataSourceIn:any;
+  dataSourceIt:any;
+  type: string;
+  width: string;
+  height: string;
+  
+  constructor(private blogCardDataService: BlogCardService, private http: HttpClient) {
 
-  constructor() { }
+    console.log("US time!")
+    console.log(usTime)
+    
+    // this.fetchData()
+    console.log("Time series data")
+
+    this.type = "timeseries";
+    this.width = "100%";
+    this.height = "900";
+    this.dataSourceUsa = {
+      caption: {
+        text: "Covid Cases to POI Tweet Analysis for USA"
+      },
+      chart: {
+        theme: "fusion"
+      },
+      data: null,
+      yaxis: null
+    };
+    this.dataSourceIn = {
+      caption: {
+        text: "Covid Cases to POI Tweet Analysis for India"
+      },
+      chart: {
+        theme: "fusion"
+      },
+      data: null,
+      yaxis: null
+    }
+    this.dataSourceIt = {
+      caption: {
+        text: "Covid Cases to POI Tweet Analysis for Italy"
+      },
+      chart: {
+        theme: "fusion"
+      },
+      data: null,
+      yaxis: null
+    }
+    
+    this.fetchData("us")
+    this.fetchData("in")
+    this.fetchData("it")
+  }
+
+  fetchData(country) {
+
+      let usPois = this.blogCardDataService.getPoisByCountry(country);
+      let usTimeline;
+      if(country == "us"){
+        usTimeline = usTime
+      }
+      if(country == "it"){
+        usTimeline = itTime
+      }
+      if(country == "in"){
+        usTimeline = inTime
+      }
+      let usSchema = []
+      usSchema.push({
+        "name": "Date",
+        "type": "date",
+        "format": "%Y-%m-%d"
+      })
+      usSchema.push({
+        "name": "Cases",
+        "type": "number"
+      })
+      usSchema.push({
+        "name": "Deaths",
+        "type": "number"
+      })
+
+      let yaxis = []
+      yaxis.push({
+        plot: [
+          {
+            value: "Cases",
+          }
+        ],
+        title: "Cases"
+      })
+      yaxis.push({
+        plot: [
+          {
+            value: "Deaths",
+          }
+        ],
+        title: "Deaths"
+      })
+
+      for(let poi of usPois){
+          console.log(poi)
+          let ob = {
+            "name" : poi,
+            "type" : "number"
+          }
+          usSchema.push(ob)
+          let obj = {
+            plot: [
+              {
+                value: poi,
+              }
+            ],
+            title: poi
+          }
+          yaxis.push(obj)
+      }
+
+      console.log(usSchema)
+
+      let fusionTable = new FusionCharts.DataStore().createDataTable(
+        usTimeline,
+        usSchema
+      ); // Instance of DataTable to be passed as data in dataSource
+      if(country == "us"){
+        this.dataSourceUsa.data = fusionTable;
+        this.dataSourceUsa.yaxis = yaxis;
+      }
+      if(country == "in"){
+        this.dataSourceIn.data = fusionTable;
+        this.dataSourceIn.yaxis = yaxis;
+      }
+      if(country == "it"){
+        this.dataSourceIt.data = fusionTable
+        this.dataSourceIt.yaxis = yaxis;
+      }
+    //});
+  }
 
   ngOnInit() {
   }

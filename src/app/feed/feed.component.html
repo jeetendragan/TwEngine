@@ -2,166 +2,154 @@
 
   <div class="item item-4 feedMain" fxFlexOffset.xs="0">
 
-        <div class="searchBar">
-            <mat-form-field class="searchBarField">
-              <mat-label>Search...</mat-label>
-              <input [(ngModel)] = "searchQuery" matInput placeholder="Covid vaccine, or covid USA, or whatever...">
-            </mat-form-field>
-            <button mat-button>
-              <mat-icon (click) = "fireSearch()">search</mat-icon>
-          </button>
-        </div>
-        <div>{{searchQuery}}</div>
-        <div>Result: {{result}}</div>
+    <div class="searchBar">
+      <mat-form-field class="searchBarField">
+        <mat-label>Search...</mat-label>
+        <input [(ngModel)]="searchQuery" matInput placeholder="Covid vaccine, or covid USA, or whatever...">
+      </mat-form-field>
+      <button mat-button>
+        <mat-icon (click)="fireSearch()">search</mat-icon>
+      </button>
+    </div>
+    <div style="text-align: center;">{{searchStatus}}</div>
+    <div class="searchOptions">
+      <mat-form-field class="searchOptionItem">
+        <mat-label>Country</mat-label>
+        <mat-select [(ngModel)]="searchOptCountry">
+          <mat-option>None</mat-option>
+          <mat-option value="USA">United States</mat-option>
+          <mat-option value="India">India</mat-option>
+          <mat-option value="Italy">Italy</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <div class="searchOptions">
-          <mat-form-field class="searchOptionItem">
-            <mat-label>Country</mat-label>
-            <mat-select [(ngModel)]="searchOptCountry">
-              <mat-option>None</mat-option>
-              <mat-option value="United States">United States</mat-option>
-              <mat-option value="India">India</mat-option>
-              <mat-option value="Italy">Italy</mat-option>
-            </mat-select>
-          </mat-form-field>
+      <mat-form-field class="searchOptionItem">
+        <mat-label>POI</mat-label>
+        <mat-select [(ngModel)]="searchOptPoi">
+          <mat-option>None</mat-option>
+          <!--<mat-option *ngFor="let tweet of tweetResults;"></mat-option>-->
+          <mat-option *ngFor="let poiOption of poiOptions" [value]="poiOption.poi_handle" >{{ poiOption.poi_name }}</mat-option>
+          <!--<mat-option value="option1">Narendra Modi</mat-option>
+          <mat-option value="option2">Arvind Kejriwal</mat-option>
+          <mat-option value="option3">Indian Health Ministry</mat-option>
+          <mat-option value="option3">Donald Trump</mat-option>
+          <mat-option value="option3">Andrew Cuomo</mat-option>
+          <mat-option value="option3">CDC</mat-option>-->
+        </mat-select>
+      </mat-form-field>
 
-          <mat-form-field class="searchOptionItem">
-            <mat-label>POI</mat-label>
-            <mat-select [(ngModel)]="searchOptPoi">
-              <mat-option>None</mat-option>
-              <mat-option value="option1">Narendra Modi</mat-option>
-              <mat-option value="option2">Arvind Kejriwal</mat-option>
-              <mat-option value="option3">Indian Health Ministry</mat-option>
-              <mat-option value="option3">Donald Trump</mat-option>
-              <mat-option value="option3">Andrew Cuomo</mat-option>
-              <mat-option value="option3">CDC</mat-option>
-            </mat-select>
-          </mat-form-field>
+      <mat-form-field class="searchOptionItem">
+        <mat-label>Topic</mat-label>
+        <mat-select [(ngModel)]="searchOptTopic">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let option of topicOptions; let index = index" [value]="index" >{{ option }}</mat-option>
+          <!--<mat-option value="option1">Covid</mat-option>
+          <mat-option value="option2">CDC</mat-option>
+          <mat-option value="option3">Masks</mat-option>
+          <mat-option value="option3">Trump</mat-option>
+          <mat-option value="option3">Vaccine</mat-option>
+          <mat-option value="option3">lockdown</mat-option>-->
+        </mat-select>
+      </mat-form-field>
 
-          <mat-form-field class="searchOptionItem">
-            <mat-label>Topic</mat-label>
-            <mat-select [(ngModel)]="searchOptTopic">
-              <mat-option>None</mat-option>
-              <mat-option value="option1">Covid</mat-option>
-              <mat-option value="option2">CDC</mat-option>
-              <mat-option value="option3">Masks</mat-option>
-              <mat-option value="option3">Trump</mat-option>
-              <mat-option value="option3">Vaccine</mat-option>
-              <mat-option value="option3">lockdown</mat-option>
-            </mat-select>
-          </mat-form-field>
+      <mat-form-field class="searchOptionItem">
+        <mat-label>Language</mat-label>
+        <mat-select [(ngModel)]="searchOptLang">
+          <mat-option>None</mat-option>
+          <mat-option value="en">English</mat-option>
+          <mat-option value="hi">Hindi</mat-option>
+          <mat-option value="it">Italian</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-          <mat-form-field class="searchOptionItem">
-            <mat-label>Language</mat-label>
-            <mat-select [(ngModel)]="searchOptLang">
-              <mat-option>None</mat-option>
-              <mat-option value="English">English</mat-option>
-              <mat-option value="Hindi">Hindi</mat-option>
-              <mat-option value="Italian">Italian</mat-option>
-            </mat-select>
-          </mat-form-field>
-          
-        </div>        
-    <div class="searchResults" fxLayout="row"> 
+    <div class="searchResults" fxLayout="row">
       <div class="searchResultsColumn">
-        <div class="searchResultColumnHeading">
-          Related Tweets
-        </div>
-
-        <div class="searchResultCard" *ngFor="let a of result; let index = index">{{a}}</div>
-
-        <div class="searchResultCard">
-          <div class="searchResultCardHeader">
-            <b>@cdc</b>
-          </div>
-          <div class="searchResultCardBody">
-            Rates of #COVID19 remain high across all regions of the United States, with 68% of jurisdictions experiencing increasing case rates. Help slow the spread:
-            Face with medical mask Wear a mask over your nose AND mouth.
-            Raised hand with fingers splayed Wash your hands. 
-            Left right arrow Stay 6 feet from others. 
-          </div>
-          <div class="searchResultOtherDetails">
-            other details appear here..
-          </div>
-        </div>
-
-        <div class="searchResultCard">
-          <div class="searchResultCardHeader">
-            <b>@realDonaldTrump</b>
-          </div>
-          <div class="searchResultCardBody">
-            I will easily & quickly win Georgia if Governor 
-        @BrianKempGA
-         or the Secretary of State permit a simple signature verification. Has not been done and will show large scale discrepancies. Why are these two “Republicans” saying no? If we win Georgia, everything else falls in place!
-          </div>
-
-          <div class="searchResultCardOtherDetails">
-            Other details will appear here...
-          </div>
-
-        </div>
-
-      </div>
-      <!--<div class="searchResultsColumn">
         <div class="searchResultColumnHeading">
           Related News
         </div>
-        <div class="searchResultCard">
-          <div class="searchResultCardHeader">
-            <b>Covid-19 has already exhausted the US. And it's only the start of a dark and deadly winter</b>
-          </div>
-          <div class="searchResultCardBody">
-            From California to Kansas, Massachusetts to Florida, and everywhere in-between, doctors, nurses, funeral home directors and food bank organizers are bracing for a devastating season. They're already stretched thin and exhausted after months of confronting the deadly Covid-19 pandemic, but they fear the worst is still yet to come.
-          </div>
-          <div class="searchResultOtherDetails">
-            <b>Source - CNN</b>
+
+        <div class="searchResultsBody">
+          <div class="searchResultCard" *ngFor="let news of newsResults; let index = index">
+            <div class="searchResultCardHeader">
+              <b>{{news['title']}}</b>
+            </div>
+            <div class="searchResultCardBody">
+              {{news['description']}}
+            </div>
+            <div class="searchResultCardOtherDetails">
+              Read more on - {{news['source']['name']}} | <u><a href="{{news['url']}}">Link</a></u> <br>
+              
+            </div>  
           </div>
         </div>
       </div>
       <div class="searchResultsColumn">
         <div class="searchResultColumnHeading">
-          Related Analytics
+          Related Tweets
+          <mat-slide-toggle bind-checked="sortByInfScore" (change)="toggleSort()">
+            Sort by influence score
+          </mat-slide-toggle>
         </div>
-      </div>-->
-    </div>
-
-    <!--<mat-card *ngFor="let blogCardData of blogCards" class="blogCard">
-      <mat-card-content>
-        <div fxLayout="column">
-          <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-sm="column">
-            <div style="font-weight: 800">{{blogCardData.header}}</div>
-            <div style="color: gray;">{{blogCardData.caption}}</div>
+        
+        <div *ngIf="zeroSearchResults()">No search results matching query</div>
+        <div class="searchResultsBody">
+          
+        <div class="searchResultCard" *ngFor="let tweet of returnedTweets; let index = index">
+          <div class="searchResultCardHeader">
+            <b>{{tweet['user.screen_name'][0]}}</b>
           </div>
-          <div style="margin: 10px;" [innerHTML]="blogCardData.summary">
-            --><!-- {{blogCardData.summary}} -->
-    <!--      </div>
+          <div class="searchResultCardBody">
+            {{tweet['full_text'][0]}}
+          </div>
+          <div class="searchResultCardOtherDetails">
+            Sentiment: {{tweet['tweet_sentiment'][0]}} <br>
+            BM25 Score- {{tweet['score']}} | Influence Score: {{tweet['influence_score']}} 
+          </div>
         </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <a href="/blog/{{blogCardData.id}}">
-        <button mat-icon-button>
-          <mat-icon>open_in_new</mat-icon>
-        </button>
-        </a>
-      -->
-        <!-- (click)="readBlog(blogCardData.id)" -->
-        <!-- <button mat-icon-button>
-            <mat-icon style="color:grey;">share</mat-icon>
-          </button>
-          <button  mat-icon-button>
-            <mat-icon style="color: grey;">thumb_up</mat-icon>
-          </button> -->
-      <!--</mat-card-actions>
-    </mat-card>
-  </div>-->
+      </div>
+      </div>
+      <div class="searchResultsColumn">
+        <div class="searchResultColumnHeading">
+          Related analytics
+        </div>
 
-  <!-- <div class="item item-5 feedSidebar" fxFlex>
-      <mat-card class="sidebarCard">
-        <mat-card-content>
-          This is the summary of the blog. Ipsom kibarubaihsioand. adihaidhashdiahsda d,
-          <a href="dadhadadd"></a>
-        </mat-card-content>
-      </mat-card>
-    </div> -->
+        <div class="searchResultsBody">
 
-</div>
+          <div style="width: 500px; margin: 0 auto; padding: 0px;" *ngIf = "generalSentimentData != undefined && generalSentimentData != null">
+            <canvas baseChart [datasets]="generalSentimentData" [labels]="generalSentimentLabels"
+              legend="true" chartType="bar">
+            </canvas>
+          </div>
+
+          <div style="display: block; width: 500px; margin: 0 auto;" *ngIf="pieChartCountryTweetData != undefined && pieChartCountryTweetData != null">
+            <canvas baseChart [data]="pieChartCountryTweetData" [labels]="pieChartCountryTweetLabels" chartType="pie"
+                legend="true">
+            </canvas>
+          </div>
+
+          <div style="width: 500px; margin: 0 auto; padding: 0px;" *ngIf = "tweetsByLangData != undefined && tweetsByLangData != null">
+            <canvas baseChart [datasets]="tweetsByLangData" [labels]="tweetsByLangLabel"
+              legend="true" chartType="bar">
+            </canvas>
+          </div>
+
+          <div style="width: 500px; margin: 0 auto; padding: 0px;" *ngIf = "barChartPoiSentimentData != undefined && barChartPoiSentimentData != null">
+            <canvas baseChart [datasets]="barChartPoiSentimentData" [labels]="barChartPoiSentimentLabels"
+              legend="true" chartType="bar">
+            </canvas>
+          </div>
+
+          <div style="width: 500px; margin: 0 auto; padding: 0px;" *ngIf = "tweetsByTopicData != undefined && tweetsByTopicData != null">
+            <canvas baseChart [datasets]="tweetsByTopicData" [labels]="tweetsByTopicLabels"
+              legend="true" chartType="bar">
+            </canvas>
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>

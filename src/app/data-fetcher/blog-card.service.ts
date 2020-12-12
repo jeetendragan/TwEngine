@@ -55,4 +55,122 @@ export class BlogCardService {
     return null;
   }
 
+  pois = {
+    "drharshvardhan" : "Dr. Harsh Vardhan",
+    "RahulGandhi" : "Rahul Gandhi",
+    "PiyushGoyal" : "Piyush Goyal",
+    "realDonaldTrump" : "Donald Trump",
+    "NYGovCuomo" : "Andrew Cuomo",
+    "CDCgov" : "CDC",
+    "MinisteroSalute" : "Italian Health Ministry",
+    "matteosalvinimi" : "Matteo Salvini",
+    "matteorenzi" : "Matteo Renzi",
+    "KamalaHarris" : "Kamala Harris",
+    "JoeBiden": "Joe Biden",
+    "GiorgiaMeloni": "Giorgia Meloni", 
+    "Narendramodi" : "Narendra Modi",
+    "AmitShah": "Amit Shah",
+    "ArvindKejriwal": "Arvind Kejriwal",
+    "HillaryClinton":"Hillary Clinton",
+    "BernieSanders": "Bernie Sanders",
+    "GiuseppeConteIT": "Giuseppe ConteIT",
+    "lauraboldrini": "Laura Boldrini",
+    "rajnathsingh": "Rajnath Singh"
+ }
+ 
+ public getPois(){
+   // returns an array of objects, with each object having the handle, and the Person's name
+   var poiArray = []
+   for(let poiHandle in this.pois){
+     let poiName = this.pois[poiHandle]
+     var ob = {
+        'poi_handle': poiHandle,
+        'poi_name': poiName
+     }
+     poiArray.push(ob)
+   }
+   return poiArray
+ }
+
+ chartData = [
+  {
+    label: "Venezuela",
+    value: "290"
+  },
+  {
+    label: "Saudi",
+    value: "260"
+  },
+  {
+    label: "Canada",
+    value: "180"
+  },
+  {
+    label: "Iran",
+    value: "140"
+  },
+  {
+    label: "Russia",
+    value: "115"
+  },
+  {
+    label: "UAE",
+    value: "100"
+  },
+  {
+    label: "US",
+    value: "30"
+  },
+  {
+    label: "China",
+    value: "30"
+  }
+];
+
+public getDumyData(){
+  return this.chartData;
+}
+usPois = ['CDCgov', 'Joe Biden', 'Kamala Harris', 'Cuomo', 'Trump']
+inPois = ['Amit Shah', 'Harsh Vardhan', 'Narendra Modi', 'Piyush Goyal', 'Rajnath Singh']
+itPois = ['Giorgia Meloni', 'Laura Boldrini', 'Matteo Renzi', 'Matteo Salvinimi', 'Ministero Salute']
+
+topics = [
+  "governo",
+  "trump",
+  "covid",
+  "government",
+  "death",
+  "delhi",
+  "india",
+  "narendramodi",
+  "mask",
+  "address",
+  "coronavirus",
+  "case",
+  "test",
+  "nation",
+  "america",
+  "protect",
+  "virus",
+  "lockdown",
+  "great",
+  "realdonaldtrump"]
+
+getTopics(){
+  return this.topics;
+}
+
+getPoisByCountry(country){
+  if(country == "us"){
+    return this.usPois;
+  }
+  if(country == "in"){
+    return this.inPois;
+  }
+  if(country == "it"){
+    return this.itPois;
+  }
+  return null;
+}
+
 }

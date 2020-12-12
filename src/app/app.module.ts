@@ -21,7 +21,15 @@ import { FeedComponent } from './feed/feed.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { IFrameEmbedderComponent, SafePipe } from './iframe-embedder/iframe-embedder.component';
 
+import { FusionChartsModule } from "angular-fusioncharts";
+// Import FusionCharts library and chart modules
+import * as FusionCharts from "fusioncharts";
+import * as charts from "fusioncharts/fusioncharts.charts";
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import * as TimeSeries from "fusioncharts/fusioncharts.timeseries";
 
+// Pass the fusioncharts library and chart modules
+FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme, TimeSeries);
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +52,8 @@ import { IFrameEmbedderComponent, SafePipe } from './iframe-embedder/iframe-embe
     MatSelectModule,
     HttpClientModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    FusionChartsModule
   ],
   providers: [
     BlogCardService,
