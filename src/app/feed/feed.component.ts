@@ -145,7 +145,7 @@ export class FeedComponent implements OnInit {
 
     console.log(httpParams)
     console.log("Result will appear after this:")
-    this.http.get("http://54.80.27.58:8080/search", { params: httpParams }).subscribe(data => {
+    this.http.get("http://35.174.17.159:8080/search", { params: httpParams }).subscribe(data => {
       console.log("Response: ")
       console.log(data)
       if (true) {
